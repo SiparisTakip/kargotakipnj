@@ -39,10 +39,19 @@ async function getCargoInfo(gonderino) {
         const headers = {
             'Authorization': API_KEY,
             'From': USER_EMAIL,
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+            'Accept-Language': 'tr-TR,tr;q=0.9',
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache'
         };
 
-        const response = await axios.get(url, { headers, timeout: 10000 });
+        const response = await axios.get(url, { 
+            headers, 
+            timeout: 15000,
+            httpAgent: require('http').globalAgent,
+            httpsAgent: require('https').globalAgent
+        });
         const $ = cheerio.load(response.data);
 
         let link_cargo = null;
@@ -127,7 +136,9 @@ async function getCargoFromAPI(takip) {
         const response = await axios.get(API_URL, {
             headers,
             params: { sipno: takip },
-            timeout: 10000
+            timeout: 15000,
+            httpAgent: require('http').globalAgent,
+            httpsAgent: require('https').globalAgent
         });
 
         const json_data = response.data;
