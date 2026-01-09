@@ -1,3 +1,5 @@
+const http = require('http');
+const https = require('https');
 const express = require('express');
 const axios = require('axios');
 const cheerio = require('cheerio');
@@ -83,7 +85,7 @@ async function getCargoInfo(gonderino) {
 
         if (link_cikti) {
             try {
-                const transResponse = await axios.get(link_cikti, { headers, timeout: 10000 });
+                const transResponse = await axios.get(link_cikti, { headers, timeout: 15000 });
                 const $trans = cheerio.load(transResponse.data);
 
                 const tablo = $trans('table').first().find('tr');
