@@ -69,7 +69,7 @@ async function getCargoInfo(gonderino) {
 
         if (!link_cargo) return null;
 
-        const cargoResponse = await axios.get(link_cargo, { headers, timeout: 10000 });
+                        const cargoResponse = await axios.get(link_cargo, { headers, timeout: 15000 });
         const $cargo = cheerio.load(cargoResponse.data);
 
         const cikis_sube = $cargo('span#cikis_subesi').text().trim();
